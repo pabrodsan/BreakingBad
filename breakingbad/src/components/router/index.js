@@ -1,7 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import Character from '../characters/Character';
-import CharacterDetail from '../characterDetail/CharacterDetail';
+import Characters from '../characters';
+// import CharacterDetail from '../characterDetail/CharacterDetail';
+import CharacterCard from '../commons/CharacterCard';
 import {withTranslation} from 'react-i18next';
 
 const Router = (props) => {
@@ -9,11 +10,14 @@ const Router = (props) => {
         <BrowserRouter>
             <Switch>
                 <Route path="/">
-                    <Character {...props} />
+                    <Characters {...props} />
                 </Route>
-                <Route path="/">
+                {/* <Route path="/">
+                    <CharacterCard {...props} />
+                </Route> */}
+                {/* <Route path="/">
                     <CharacterDetail {...props} />
-                </Route>
+                </Route> */}
             </Switch>
         </BrowserRouter>
     );
