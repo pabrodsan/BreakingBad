@@ -2,11 +2,13 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {RANDOM_QUOTE_CHARACTER} from '../../utils/Constants';
+import { useHistory } from 'react-router-dom';
 
 const CharacterCard = ({ t, character }) => {
 
   // const [character, setCharacter] = useState({});
   const [characterQuote, setCharacterQuote] = useState({})
+  const history = useHistory();
 
   useEffect(() => {
     const name_surname = character.name.split(' ');
@@ -19,8 +21,12 @@ const CharacterCard = ({ t, character }) => {
     .catch((err) => console.log(err))
   }, [])
 
+  // const handleClick = () => {
+  //   history.push("/path/to/push");
+  // }
+
     return (
-      <Card id='1'>
+      <Card onClick={() => console.log('aaaaaaaaaa')} id={character.char_id}>
         <Title>
           {character.name}
         </Title>
@@ -34,21 +40,27 @@ const CharacterCard = ({ t, character }) => {
     );
 };
 
-const Title = styled.h1`
+const Title = styled.div`
   font-size: 1.5em;
-  width: 25%;
   text-align: center;
 `;
 
 const Photo = styled.img`
-  width: 25%;
-  height: 25%;
+  display: block;
+  max-width:230px;
+  max-height:230px;
+  width: auto;
+  height: auto;
 `;
 
-const Card = styled.div`
+const Card = styled.button`
   display: flex;
   flex-direction: column; 
-  align-items: center;
+  border: 2px solid yellow;
+  border-radius: 8px;
+  // justify-content: center;
+  margin: 20px;
+
 `;
 
 const Quote = styled(Title)`
