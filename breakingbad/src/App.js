@@ -4,9 +4,9 @@ import Router from './components/router';
 
 const App = () => {
   return (
-      <>
-       <Router />
-      </>
+      <div style={{ backgroundColor: "gray"}}>
+        <Router />
+      </div>
   );
 };
 export default App;
