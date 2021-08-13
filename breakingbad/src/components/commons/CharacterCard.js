@@ -11,11 +11,16 @@ const CharacterCard = ({ t, character }) => {
   const history = useHistory();
 
   useEffect(() => {
-    const name_surname = character.name.split(' ');
-    let url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}+${name_surname[1]}`;
-    if (name_surname.length === 3) {
+    console.log(character.name)
+    const name_surname = character && character.name.split(" ");
+
+    let url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}`
+    if (name_surname.length === 2) {
+      url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}+${name_surname[1]}`;
+    } else if (name_surname.length === 3) {
       url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}+${name_surname[1]}+${name_surname[2]}`
     }
+    console.log(url)
     axios.get(url)
     .then((res) => {setCharacterQuote(res.data[0])})
     .catch((err) => console.log(err))
@@ -33,9 +38,9 @@ const CharacterCard = ({ t, character }) => {
         <Photo 
           src={character.img}
         />
-        {/* <Quote>
-          {characterQuote.quote}
-        </Quote> */}
+        <Quote>
+          {characterQuote && characterQuote.quote}
+        </Quote>
       </Card>
     );
 };

@@ -8,9 +8,9 @@ import { initApi } from './duck/redux';
 
 const Character = ({ t }) => {
 
-  const [characters, setCharacters] = useState([]);
+  // const [characters, setCharacters] = useState([]);
   // const [characterQuote, setCharacterQuote] = useState({})
-  // const characters = useSelector(charactersList);
+  const characters = useSelector((state) => state.characterInit.listOfCharacters);
 
   /**
    * Hacer la llamada de la api en el useEffect y dentro del then llamar al redux para que guarde la respuesta.
@@ -18,10 +18,12 @@ const Character = ({ t }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // axios.get(ALL_CHARACTER)
-    // .then((res) => {setCharacters(res.data)})
-    // .catch((err) => console.log(err))
-    dispatch(initApi())
+    axios.get(ALL_CHARACTER)
+    .then((res) => {
+      // setCharacters(res.data)
+      dispatch(initApi(res.data))
+    })
+    .catch((err) => console.log(err))
     // axios.get(`${RANDOM_QUOTE_CHARACTER}`)
     // .then((res) => {setCharacterQuote(res.data[0])})
     // .catch((err) => console.log(err))
@@ -30,8 +32,7 @@ const Character = ({ t }) => {
     
     return (
       <Wrapper>
-        {characters.map((character) => {
-          // return data.name
+        {characters && characters.map((character) => {
           return (
             <CharacterCard 
               character={character}
