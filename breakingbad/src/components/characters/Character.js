@@ -46,6 +46,7 @@ const Character = ({ t }) => {
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap; 
+  justify-content: space-evenly;
 `;
 
 export default Character;

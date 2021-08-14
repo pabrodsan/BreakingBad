@@ -4,7 +4,7 @@ import Router from './components/router';
 
 const App = () => {
   return (
-      <div style={{ backgroundColor: "gray"}}>
+      <div>
         <Router />
       </div>
   );

@@ -12,15 +12,17 @@ const CharacterCard = ({ t, character }) => {
 
   useEffect(() => {
     console.log(character.name)
-    const name_surname = character && character.name.split(" ");
+    const name_surname = character?.name?.split(" ");
 
-    let url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}`
-    if (name_surname.length === 2) {
-      url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}+${name_surname[1]}`;
-    } else if (name_surname.length === 3) {
-      url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}+${name_surname[1]}+${name_surname[2]}`
+    let url = ''
+    if (name_surname) {
+      url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}`
+      if (name_surname.length === 2) {
+        url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}+${name_surname[1]}`;
+      } else if (name_surname.length === 3) {
+        url = `${RANDOM_QUOTE_CHARACTER}${name_surname[0]}+${name_surname[1]}+${name_surname[2]}`
+      }
     }
-    console.log(url)
     axios.get(url)
     .then((res) => {setCharacterQuote(res.data[0])})
     .catch((err) => console.log(err))
@@ -47,15 +49,12 @@ const CharacterCard = ({ t, character }) => {
 
 const Title = styled.div`
   font-size: 1.5em;
-  text-align: center;
 `;
 
 const Photo = styled.img`
-  display: block;
-  max-width:230px;
-  max-height:230px;
-  width: auto;
-  height: auto;
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
 `;
 
 const Card = styled.button`
@@ -63,8 +62,9 @@ const Card = styled.button`
   flex-direction: column; 
   border: 2px solid yellow;
   border-radius: 8px;
-  // justify-content: center;
-  margin: 20px;
+  margin: 3%;
+  width: 225px;
+  box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)
 
 `;
 
